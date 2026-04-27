@@ -32,6 +32,7 @@ const LoginPage = () => {
     }
     if(data){
       alert("Login successful");
+      
     }
   };
 
