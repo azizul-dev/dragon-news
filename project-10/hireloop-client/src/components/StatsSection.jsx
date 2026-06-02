@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { Briefcase, Factory, Magnifier, Star } from "@gravity-ui/icons";
+import { motion } from "motion/react"
+
 
 const stats = [
   {
@@ -53,6 +55,14 @@ export default function StatsSection() {
             <br />
             find their dream positions.
           </h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-gray-300 text-lg"
+          >
+            Join our community of job seekers and employers today.
+          </motion.p>
         </div>
 
         {/* Stats Cards */}

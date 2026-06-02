@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button, Link } from "@heroui/react";
+import { signOut, useSession,} from "@/lib/auth-client";
 
 const links = [
   {
@@ -20,11 +21,20 @@ const links = [
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session, isPending } = useSession();
+  const user = session?.user;
+
+  console.log("SESSION:", session);
+  console.log("USER:", user);
+  console.log("PENDING:", isPending);
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#111118]">
       <header className="mx-auto flex h-16 max-w-6xl items-center px-6">
-        
         {/* Logo */}
         <Link href="#" className="flex items-center gap-3 no-underline">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-700">
@@ -35,14 +45,13 @@ const NavBar = () => {
 
           <div className="flex flex-col leading-tight">
             <span className="text-[13px] font-bold text-white">
-            <h1 className=" text-lg font-bold">Hire Loop</h1>
+              <h1 className=" text-lg font-bold">Hire Loop</h1>
             </span>
           </div>
         </Link>
 
         {/* Right Side */}
         <div className="ml-auto hidden items-center gap-6 md:flex">
-          
           {/* Desktop Nav Links */}
           <ul className="flex items-center gap-1 rounded-xl border border-white/[0.08] bg-white/[0.05] px-2 py-1.5 list-none">
             {links.map((link) => (
@@ -56,21 +65,24 @@ const NavBar = () => {
               </li>
             ))}
           </ul>
-            <div className="h-8 w-px bg-white/20" />
+          <div className="h-8 w-px bg-white/20" />
           {/* Desktop Actions */}
           <div className="flex items-center gap-1">
-            <Link
-              href="/signin"
-              className="rounded-lg px-5 py-2 text-sm font-semibold text-violet-500 no-underline transition hover:bg-violet-500/10"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/signup"
-              className="rounded-lg px-5 py-2 text-sm font-semibold text-violet-500 no-underline transition hover:bg-violet-500/10"
-            >
-              Sign Up
-            </Link>
+            {user ? (
+              <>
+                Hi, {user.name}!
+                <Button onClick={handleSignOut} variant="ghost">
+                  SignOut
+                </Button>
+              </>
+            ) : (
+              <Link
+                href="/signin"
+                className="rounded-lg px-5 py-2 text-sm font-semibold text-violet-500 no-underline transition hover:bg-violet-500/10"
+              >
+                Sign In
+              </Link>
+            )}
 
             <Button
               className="rounded-lg bg-white px-5 py-2 text-sm font-semibold text-black hover:bg-white/90"

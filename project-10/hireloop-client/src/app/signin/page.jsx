@@ -116,7 +116,7 @@ export default function SigninPage() {
         </form>
 
         <div className="mt-6 text-center text-sm">
-          Don't have an account?{" "}
+          New to Hire Loop?{" "}
           <Link href="/signup" className="font-semibold text-primary">
             Create Account
           </Link>
