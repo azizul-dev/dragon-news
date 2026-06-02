@@ -60,10 +60,16 @@ const NavBar = () => {
           {/* Desktop Actions */}
           <div className="flex items-center gap-1">
             <Link
-              href="#"
+              href="/signin"
               className="rounded-lg px-5 py-2 text-sm font-semibold text-violet-500 no-underline transition hover:bg-violet-500/10"
             >
               Sign In
+            </Link>
+            <Link
+              href="/signup"
+              className="rounded-lg px-5 py-2 text-sm font-semibold text-violet-500 no-underline transition hover:bg-violet-500/10"
+            >
+              Sign Up
             </Link>
 
             <Button
