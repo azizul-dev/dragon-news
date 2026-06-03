@@ -24,10 +24,6 @@ const NavBar = () => {
   const { data: session, isPending } = useSession();
   const user = session?.user;
 
-  console.log("SESSION:", session);
-  console.log("USER:", user);
-  console.log("PENDING:", isPending);
-
   const handleSignOut = async () => {
     await signOut();
   };

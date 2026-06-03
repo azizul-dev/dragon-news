@@ -1,5 +1,6 @@
 "use client";
 
+import { Description, Label, Radio, RadioGroup } from "@heroui/react";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,6 +13,8 @@ import { authClient } from "@/lib/auth-client";
 
 export default function SignupPage() {
   const router = useRouter();
+
+  const [role, setRole] = useState("seeker");
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -59,6 +62,7 @@ export default function SignupPage() {
         name: formData.name,
         email: formData.email,
         password: formData.password,
+        role,
       });
 
       if (error) {
@@ -143,6 +147,34 @@ export default function SignupPage() {
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <Label>Subscription plan</Label>
+            <RadioGroup
+              defaultValue="seeker"
+              name="role"
+              onChange={value => setRole(value)}
+              orientation="horizontal"
+            >
+              <Radio value="seeker">
+                <Radio.Control>
+                  <Radio.Indicator />
+                </Radio.Control>
+                <Radio.Content>
+                  <Label>Job Seeker</Label>
+                  <Description>For side projects</Description>
+                </Radio.Content>
+              </Radio>
+              <Radio value="recruiter">
+                <Radio.Control>
+                  <Radio.Indicator />
+                </Radio.Control>
+                <Radio.Content>
+                  <Label>Recruiter</Label>
+                </Radio.Content>
+              </Radio>
+            </RadioGroup>
           </div>
 
           <Button
